@@ -15,13 +15,13 @@ import sampleproject.composeapp.generated.resources.Res
 import sampleproject.composeapp.generated.resources.compose_multiplatform
 
 @Composable
-@Preview
-fun App() {
+fun App(text: String? = null) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
+        val greeting = remember { Greeting().greet() }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+                Text(text?:greeting)
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
@@ -32,4 +32,10 @@ fun App() {
             }
         }
     }
+}
+
+@Composable
+@Preview
+private fun AppPreview(){
+    App()
 }
